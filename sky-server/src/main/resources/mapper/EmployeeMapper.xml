@@ -2,4 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+    <insert id="insert">
+        insert into employee (name, username, password, phone, sex, id_number, create_time, update_time, create_user,
+                              update_user)
+        VALUES (#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+    <update id="update">
+        update employee
+        <set>
+            <if test="status!=null">status=#{status},</if>
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="idNumber!=null">id_number=#{idNumber},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="username!=null">username=#{username},</if>
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+
+    </update>
+    <update id="updatePassword">
+        update employee
+        <set>
+            <if test="newPassword!=null and newPassword!=''">
+                password=#{newPassword},
+            </if>
+        </set>
+        <where>
+            id=#{empId}
+        </where>
+    </update>
+    <select id="pageSearch" resultType="com.sky.entity.Employee">
+        select * from employee
+        <where>
+            <if test="name!=null and name!=''">
+                name like concat("%", #{name}, "%")
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>

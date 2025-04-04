@@ -22,7 +22,7 @@ mybatis:
     map-underscore-to-camel-case: true
 
 logging:
-  level:
+  level: 
     com:
       sky:
         mapper: debug
