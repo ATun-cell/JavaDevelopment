@@ -4,4 +4,4 @@
 *.class
 *Test.java
 **/test/
-G:\PyProject\javaProject\sky-take-out\sky-server\src\main\resources\application-dev.yml
+application-dev.yml
